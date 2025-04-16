@@ -1,6 +1,7 @@
 using CUDA
 using oneAPI
 using Adapt
+using Oceananigans.Architectures
 import KernelAbstractions as KA
 
 # Test if the architecture is oneAPI
@@ -8,7 +9,7 @@ if CUDA.functional() && oneAPI.functional()
     error("CUDA and oneAPI are both functional. Please ensure that only one of them is functional.")
 end
 
-arch = CPU()
+arch = Architectures.CPU()
 backend = KA.CPU()
 
 if CUDA.functional()
