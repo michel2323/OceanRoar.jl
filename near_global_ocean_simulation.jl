@@ -174,6 +174,9 @@ ocean.output_writers[:surface] = JLD2Writer(ocean.model, outputs;
 
 run!(simulation)
 
+# Stop for now after this
+exit(0)
+
 # ### Running the simulation for real
 
 # After the initial spin up of 10 days, we can increase the time-step and run for longer.
