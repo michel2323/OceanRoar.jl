@@ -2,3 +2,6 @@
 ecco_credentials.jl
 bathymetry.png
 *.jld2
+mpiexecjl
+*.e*
+*.o*
