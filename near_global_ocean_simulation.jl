@@ -32,7 +32,7 @@ using Printf
 # The total depth of the domain is set to 6000 meters.
 # Finally, we specify the architecture for the simulation, which in this case is a GPU.
 MPI.Init()
-include("mpi.jl")
+# include("mpi.jl")
 include("get_arch.jl")
 include("ecco_credentials.jl")
 Nx = 1440
