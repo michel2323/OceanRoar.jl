@@ -23,6 +23,11 @@ using CairoMakie
 using CFTime
 using Dates
 using Printf
+using CUDA
+
+MPI.Init()
+rank = MPI.Comm_rank(MPI.COMM_WORLD)
+CUDA.device!(rank % 2)
 
 # ### Grid configuration
 #
@@ -31,7 +36,6 @@ using Printf
 # We use an exponential vertical spacing to better resolve the upper-ocean layers.
 # The total depth of the domain is set to 6000 meters.
 # Finally, we specify the architecture for the simulation, which in this case is a GPU.
-MPI.Init()
 # include("mpi.jl")
 include("get_arch.jl")
 include("ecco_credentials.jl")

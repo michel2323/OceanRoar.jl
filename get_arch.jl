@@ -20,5 +20,5 @@ end
 
 # arch = GPU(backend)
 # MPIPreferences.use_jll_binary("OpenMPI_jll")
-arch = Distributed(GPU(backend), partition=Partition(2, 2))
+arch = Distributed(GPU(backend), partition=Partition(2, 2), synchronized_communication = true)
 println("Backend: ", backend)
