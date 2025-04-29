@@ -14,7 +14,7 @@
 # ocean modeling (Oceananigans, ClimaOcean), and handling dates and times (CFTime, Dates).
 # These packages provide the foundational tools for setting up the simulation environment,
 # including grid setup, physical processes modeling, and data visualization.
-
+using MPI
 using ClimaOcean
 using ClimaOcean.ECCO
 using Oceananigans
@@ -31,10 +31,10 @@ using Printf
 # We use an exponential vertical spacing to better resolve the upper-ocean layers.
 # The total depth of the domain is set to 6000 meters.
 # Finally, we specify the architecture for the simulation, which in this case is a GPU.
-
+MPI.Init()
+include("mpi.jl")
 include("get_arch.jl")
 include("ecco_credentials.jl")
-
 Nx = 1440
 Ny = 600
 Nz = 40
@@ -173,6 +173,7 @@ ocean.output_writers[:surface] = JLD2Writer(ocean.model, outputs;
 # satisfy a different dynamical balance than our simulation.
 
 run!(simulation)
+MPI.Finalize()
 
 # Stop for now after this
 exit(0)

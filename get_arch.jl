@@ -18,5 +18,7 @@ elseif oneAPI.functional()
     backend = oneAPI.oneAPIBackend()
 end
 
-arch = GPU(backend)
+# arch = GPU(backend)
+# MPIPreferences.use_jll_binary("OpenMPI_jll")
+arch = Distributed(GPU(backend), partition=Partition(2, 2))
 println("Backend: ", backend)
