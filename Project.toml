@@ -4,8 +4,12 @@ CFTime = "179af706-886a-5703-950a-314cd64e0468"
 CUDA = "052768ef-5323-5732-b1bb-66c8b64840ba"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 ClimaOcean = "0376089a-ecfe-4b0e-a64f-9c555d74d754"
+IntervalArithmetic = "d1acc4aa-44c8-5952-acd4-ba5d80a2a253"
 KernelAbstractions = "63c18a36-062a-441e-b654-da1e3ab1ce7c"
 MPI = "da04e1cc-30fd-572f-bb4f-1f8673147195"
 MPIPreferences = "3da0fdf6-3ccc-4f1b-acd9-58baa6c99267"
 Oceananigans = "9e8cae18-63c1-5223-a75c-80ca9d6e9a09"
 oneAPI = "8f75cd03-7ff8-4ecb-9b8f-daf728133b1b"
+
+[compat]
+IntervalArithmetic = "<0.22.32"
