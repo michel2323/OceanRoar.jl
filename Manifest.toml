@@ -2,7 +2,7 @@
 
 julia_version = "1.10.9"
 manifest_format = "2.0"
-project_hash = "fdb7f8ab4180fbcbbc105b4d7d0e4bc69ed5dc4c"
+project_hash = "270eacc02bde92cc936213011a50972d2d75a37e"
 
 [[deps.AbstractFFTs]]
 deps = ["LinearAlgebra"]
@@ -2022,9 +2022,9 @@ version = "1.7.0"
 
 [[deps.StatsBase]]
 deps = ["AliasTables", "DataAPI", "DataStructures", "LinearAlgebra", "LogExpFunctions", "Missings", "Printf", "Random", "SortingAlgorithms", "SparseArrays", "Statistics", "StatsAPI"]
-git-tree-sha1 = "29321314c920c26684834965ec2ce0dacc9cf8e5"
+git-tree-sha1 = "b81c5035922cc89c2d9523afc6c54be512411466"
 uuid = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
-version = "0.34.4"
+version = "0.34.5"
 
 [[deps.StatsFuns]]
 deps = ["HypergeometricFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
@@ -2424,8 +2424,8 @@ version = "1.52.0+1"
 
 [[deps.oneAPI]]
 deps = ["Adapt", "CEnum", "ExprTools", "GPUArrays", "GPUCompiler", "GPUToolbox", "KernelAbstractions", "LLVM", "Libdl", "LinearAlgebra", "NEO_jll", "Preferences", "Printf", "Random", "SPIRVIntrinsics", "SPIRV_LLVM_Translator_unified_jll", "SPIRV_Tools_jll", "SparseArrays", "SpecialFunctions", "StaticArrays", "oneAPI_Level_Zero_Headers_jll", "oneAPI_Level_Zero_Loader_jll", "oneAPI_Support_jll"]
-git-tree-sha1 = "9d27949753f2349ced563f2e449d66cd311ae44a"
-repo-rev = "master"
+git-tree-sha1 = "98c291a777a68fad9ab1d1d12a714e87ce4120e2"
+repo-rev = "476fff097b695b671e8836e815a0887b033520cb"
 repo-url = "https://github.com/JuliaGPU/oneAPI.jl.git"
 uuid = "8f75cd03-7ff8-4ecb-9b8f-daf728133b1b"
 version = "2.0.2"
