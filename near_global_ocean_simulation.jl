@@ -23,11 +23,9 @@ using CairoMakie
 using CFTime
 using Dates
 using Printf
-using CUDA
 
+# GPU_PER_RANK = 2
 MPI.Init()
-rank = MPI.Comm_rank(MPI.COMM_WORLD)
-CUDA.device!(rank % 2)
 
 # ### Grid configuration
 #
@@ -38,7 +36,10 @@ CUDA.device!(rank % 2)
 # Finally, we specify the architecture for the simulation, which in this case is a GPU.
 # include("mpi.jl")
 include("get_arch.jl")
+rank = MPI.Comm_rank(MPI.COMM_WORLD)
+Oceananigans.device!(arch, rank % 2)
 include("ecco_credentials.jl")
+
 Nx = 1440
 Ny = 600
 Nz = 40

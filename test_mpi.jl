@@ -7,25 +7,27 @@ size = MPI.Comm_size(MPI.COMM_WORLD)
 comm = MPI.COMM_WORLD
 
 
-include("mpi.jl")
+include("double_buffer.jl")
 if size != 4
     error("This test requires exactly 4 MPI ranks!")
 end
 
-function main()
+function main(::Val{T}) where T
     # Define ring communication: each rank sends data to its neighbor (rank+1 modulo 4)
     dest = mod(rank + 1, 4)    # destination rank: rank+1 modulo 4
     source = mod(rank - 1, 4)  # source rank: rank-1 modulo 4
 
     # Each rank sends its own rank value as data
-    send_data = CuArray([rank])
-    recv_data = CuArray(zeros(Int, 1))
+    send_data = T([rank])
+    recv_data = T((zeros(Int, 1)))
 
     println("Rank ", rank, " sending ", send_data, " to rank ", dest)
 
     # Start non-blocking send and receive
-    send_req = MPI.Isend(send_data, dest, 0, comm)
-    recv_req = MPI.Irecv!(recv_data, source, 0, comm)
+    send_req = MPI.Isend(DoubleBuffer(send_data), dest, 0, comm)
+    recv_req = MPI.Irecv!(DoubleBuffer(recv_data), source, 0, comm)
+    @show typeof(send_req)
+    @show typeof(recv_req)
     reqs = [send_req, recv_req]
 
     # Wait for both operations to complete
@@ -37,7 +39,7 @@ function main()
     MPI.Finalize()
 end
 
-main()
+main(Val(Array))
 MPI.Finalize()
 
 # if !interactive()
