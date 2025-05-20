@@ -66,6 +66,7 @@ bottom_height = regrid_bathymetry(grid;
                                   interpolation_passes = 5,
                                   major_basins = 3)
 
+println("Creating grid...")
 grid = ImmersedBoundaryGrid(grid, GridFittedBottom(bottom_height); active_cells_map=true)
 
 # Let's see what the bathymetry looks like:
@@ -83,6 +84,7 @@ nothing #hide
 #
 # We build our ocean model using `ocean_simulation`,
 
+println("Creating ocean model...")
 ocean = ocean_simulation(grid)
 
 # which uses the default `ocean.model`,
@@ -91,6 +93,7 @@ ocean.model
 
 # We initialize the ocean model with ECCO4 temperature and salinity for January 1, 1992.
 
+println("Set temperature...")
 set!(ocean.model, T=ECCOMetadatum(:temperature),
                   S=ECCOMetadatum(:salinity))
 
@@ -103,7 +106,7 @@ set!(ocean.model, T=ECCOMetadatum(:temperature),
 # fluxes. The default ocean albedo is based on Payne (1982) and depends on cloud cover
 # (calculated from the ratio of maximum possible incident solar radiation to actual
 # incident solar radiation) and latitude. The ocean emissivity is set to 0.97.
-
+println("Create radiation...")
 radiation = Radiation(arch)
 
 # The atmospheric data is prescribed using the JRA55 dataset.
@@ -112,19 +115,22 @@ radiation = Radiation(arch)
 # The number of snapshots that are loaded into memory is determined by
 # the `backend`. Here, we load 41 snapshots at a time into memory.
 
+println("Create atmosphere...")
 atmosphere = JRA55PrescribedAtmosphere(arch; backend=JRA55NetCDFBackend(41))
 
 # ## The coupled simulation
 
 # Next we assemble the ocean, atmosphere, and radiation
 # into a coupled model,
-
+println("Create coupled model...")
 coupled_model = OceanSeaIceModel(ocean; atmosphere, radiation)
 
 # We then create a coupled simulation. We start with a small-ish time step of 90 seconds.
 # We run the simulation for 10 days with this small-ish time step.
 
-simulation = Simulation(coupled_model; Δt=90, stop_time=10days)
+println("Create simulation...")
+# simulation = Simulation(coupled_model; Δt=90, stop_time=10days)
+simulation = Simulation(coupled_model; Δt=90, stop_time=.1days)
 
 # We define a callback function to monitor the simulation's progress,
 
@@ -176,7 +182,7 @@ ocean.output_writers[:surface] = JLD2Writer(ocean.model, outputs;
 # We spin up the simulation with a small-ish time-step to resolve the "initialization shock"
 # associated with starting from ECCO2 initial conditions that are both interpolated and also
 # satisfy a different dynamical balance than our simulation.
-
+println("Run simulation...")
 run!(simulation)
 MPI.Finalize()
 
